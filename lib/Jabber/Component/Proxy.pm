@@ -1,7 +1,7 @@
 # Jabber::Component::Proxy
 # (c) DJ Adams 2001
 
-# $Id: Proxy.pm,v 1.1.1.1 2001/12/16 20:19:51 dj Exp $
+# $Id: Proxy.pm,v 1.3 2002/04/01 18:02:32 dj Exp $
 
 =head1 NAME
 
@@ -60,7 +60,7 @@ Jabber::Connection
 package Jabber::Component::Proxy;
 
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use Jabber::Connection;
 use Jabber::NodeFactory;
@@ -174,6 +174,7 @@ sub _proxy {
     # Deny if not allowed
     else {
       _debug("denying $userhost");
+      $node->attr('type', 'error');
       my $error = $node->insertTag('error');
       $error->attr('code', 403);
       $error->data('Forbidden');
